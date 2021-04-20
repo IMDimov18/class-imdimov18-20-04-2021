@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -10,45 +11,76 @@ public:
 	Point2D()
 	{
 		cout << "Constructor1" << endl;
-		x = 0;
-		y = 0;
+		xCoord = 0;
+		yCoord = 0;
 	}
 
 	Point2D(float newX, float newY)
 	{
 		cout << "Constructor2: " << newX << ", " << newY << endl;
-		this->x = newX;
-		y = newY;
+		this->xCoord = newX;
+		yCoord = newY;
 	}
 
 	Point2D(const Point2D& p)
 	{
 		cout << "Copy constructor" << endl;
-		x = p.x;
-		y = p.y;
+		xCoord = p.xCoord;
+		yCoord = p.yCoord;
 	}
 
 	~Point2D()
 	{
-		cout << "Destructor: " << x << ", " << y << endl;
+		cout << "Destructor: " << xCoord << ", " << yCoord << endl;
 	}
 
 	void toString()
 	{
-		cout << x << ", " << y << endl;
+		cout << xCoord << ", " << yCoord << endl;
 	}
 
 	Point2D operator+(Point2D& otherPoint)
 	{
-		this->x += otherPoint.x;
-		this->y += otherPoint.y;
+		this->xCoord += otherPoint.xCoord;
+		this->yCoord += otherPoint.yCoord;
 
 		return *this;
 	}
 
+	_declspec(property(put = setX, get = getX)) float x;
+
+	void setX(float newValue)
+	{
+		if (newValue < -200)
+		{
+			throw "Invalid da!";
+		}
+
+		xCoord = newValue;
+
+	}
+
+	float getX()
+	{
+		return xCoord;
+	}
+
+	void setY(float newValue)
+	{
+		yCoord = newValue;
+	}
+
+	float getY()
+	{
+		return yCoord;
+	}
+
 private:
-	float x;
-	float y;
+
+
+	float xCoord;
+	float yCoord;
+	string s = "dame";
 };
 
 Point2D dump(Point2D p)
@@ -60,17 +92,16 @@ Point2D dump(Point2D p)
 
 int main()
 {
-	Point2D pp1;
-	Point2D pp2;
+	Point2D pp1(3, 4);
+	Point2D pp2(5, 6);
+	Point2D pp3;
 	Point2D* p2 = new Point2D();
-	Point2D* p3 = new Point2D(4.6, 5.);
-	dump(pp1);
+	Point2D* p3 = new Point2D(4.6, 5.)
 
-	pp1 + pp2;
-	pp1.toString();
-	p2->toString();
-	p3->toString();
+    Point2D arr[10];
+	
 
 	delete p2;
 	delete p3;
+	
 }
